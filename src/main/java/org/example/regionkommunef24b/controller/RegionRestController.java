@@ -2,6 +2,7 @@ package org.example.regionkommunef24b.controller;
 
 import org.example.regionkommunef24b.model.Region;
 import org.example.regionkommunef24b.repository.RegionRepository;
+import org.example.regionkommunef24b.service.RegionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +18,9 @@ public class RegionRestController {
 
     @Autowired
     RegionRepository regionRepository;
+
+    @Autowired
+    RegionService regionService;
 
     @GetMapping("/regioner")
     public List<Region> getRegioner() {
@@ -37,6 +41,11 @@ public class RegionRestController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/kommunenavne/{kode}")
+    public List<String> getKommunenavne(@PathVariable String kode) {
+        return regionService.kommuneNavne(kode);
     }
 
 }

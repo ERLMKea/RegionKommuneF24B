@@ -35,13 +35,10 @@ public class KommuneRestController {
         }
     }
 
-
-
     @DeleteMapping("kommune/{kode}")
     public void deleteKommune(@PathVariable String kode) {
         System.out.println("slet kode=" + kode);
         kommuneRepository.deleteById(kode);
     }
-
 
 }
