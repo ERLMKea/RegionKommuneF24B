@@ -26,7 +26,8 @@ public class ApiServiceRegionerImpl implements ApiServiceGetRegioner {
     RegionRepository regionRepository;
 
     private void saveRegioner(List<Region> regioner) {
-        regioner.forEach(reg -> regionRepository.save(reg));
+        //regioner.forEach(reg -> regionRepository.save(reg));
+        regionRepository.saveAll(regioner);
     }
 
     @Override

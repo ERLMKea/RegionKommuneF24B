@@ -24,8 +24,9 @@ public class ApiServiceGetKommunerImpl implements ApiServiceGetKommuner {
     @Autowired
     KommuneRepository kommuneRepository;
 
-    private void saveKommuner(List<Kommune> Kommuneer) {
-        Kommuneer.forEach(reg -> kommuneRepository.save(reg));
+    private void saveKommuner(List<Kommune> kommuner) {
+        //kommuner.forEach(reg -> kommuneRepository.save(reg));
+        kommuneRepository.saveAll(kommuner);
     }
 
     @Override
