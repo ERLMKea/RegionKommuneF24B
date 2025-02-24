@@ -4,11 +4,9 @@ import org.example.regionkommunef24b.model.Region;
 import org.example.regionkommunef24b.repository.RegionRepository;
 import org.example.regionkommunef24b.service.RegionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +23,18 @@ public class RegionRestController {
     @GetMapping("/regioner")
     public List<Region> getRegioner() {
         return regionRepository.findAll();
+    }
+
+    @PostMapping("/region")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Region postRegion(@RequestBody Region region) {
+        System.out.println(region);
+        return regionRepository.save(region);
+    }
+
+    @PostMapping("/region2")
+    public ResponseEntity<String> postRegion2(@RequestParam String kode, @RequestParam String navn) {
+        return ResponseEntity.ok("Received kode: " + kode + ", navn: " + navn);
     }
 
     @DeleteMapping("region/{kode}")
