@@ -17,7 +17,6 @@ public class KommuneRestController {
     @Autowired
     KommuneRepository kommuneRepository;
 
-
     @GetMapping("/kommuner")
     public List<Kommune> getKommuner() {
         return kommuneRepository.findAll();
