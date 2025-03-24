@@ -1,5 +1,6 @@
 package org.example.regionkommunef24b.controller;
 
+import org.example.regionkommunef24b.exception.ResourceNotFoundException;
 import org.example.regionkommunef24b.model.Region;
 import org.example.regionkommunef24b.repository.RegionRepository;
 import org.example.regionkommunef24b.service.RegionService;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -45,7 +47,7 @@ public class RegionRestController {
     }
 
     @GetMapping("region/{kode}")
-    public ResponseEntity<Region> getRegion(@PathVariable String kode) {
+    public ResponseEntity<Region> getRegionKode(@PathVariable String kode) {
         Optional<Region> region = regionRepository.findById(kode);
         if (region.isPresent()) {
             return ResponseEntity.ok(region.get());
@@ -57,6 +59,20 @@ public class RegionRestController {
     @GetMapping("/kommunenavne/{kode}")
     public List<String> getKommunenavne(@PathVariable String kode) {
         return regionService.kommuneNavne(kode);
+    }
+
+    @GetMapping("region/name/{name}")
+    public Region getRegion(@PathVariable String name) {
+        return regionRepository.findByNavn(name)
+                .orElseThrow(() -> new ResourceNotFoundException("Region with name " + name + " not found"));
+
+    }
+
+    @GetMapping("region/name2/{name}")
+    public ResponseEntity<Region> getRegion2(@PathVariable String name) {
+        Region reg = regionRepository.findByNavn(name)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND , "Region med " + name + " not found"));
+        return new ResponseEntity<>(reg, HttpStatus.OK);
     }
 
 }

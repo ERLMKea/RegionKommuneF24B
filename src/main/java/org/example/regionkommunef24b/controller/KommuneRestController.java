@@ -38,4 +38,9 @@ public class KommuneRestController {
         kommuneRepository.deleteById(kode);
     }
 
+
+
+
 }
+
+
