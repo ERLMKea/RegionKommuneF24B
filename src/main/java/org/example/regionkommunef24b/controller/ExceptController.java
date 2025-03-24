@@ -42,6 +42,33 @@ public class ExceptController {
         return fileContent;
     }
 
+    @GetMapping("divx/{divnum1}/{divnum2}")
+    public int getdivnumx(@PathVariable int divnum1, @PathVariable int divnum2) {
+        int i1 = divnum1 / divnum2;
+        return i1;
+    }
+
+    @GetMapping("div/{divnum1}/{divnum2}")
+    public Integer getdivnum(@PathVariable Integer divnum1, @PathVariable Integer divnum2) {
+        Integer i1 = divnum1 / divnum2;
+        return i1;
+    }
+
+
+    @GetMapping("/loopi/{loopnum}")
+    public int getLoopnum(@PathVariable int loopnum) {
+        int x = 0;
+        for (int i = 0; i < loopnum; i++) {
+            x++;
+        }
+        return x;
+    }
+
+    @GetMapping("/loop/{loopnum}")
+    public String getloop(@PathVariable String loopnum) {
+        int x = Integer.parseInt(loopnum);
+        return "" + x;
+    }
 
 
 
