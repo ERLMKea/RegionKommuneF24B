@@ -1,0 +1,3 @@
+apis:
+  RegionKomOpenApi.yaml:
+    alias: "sample-api"
